@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 
 #starting brownser
 options = Options()
-options.headless == False
+options.headless = True
 driver = webdriver.Firefox(options=options)
 
 def downloadPDF(title):
@@ -41,26 +41,20 @@ def downloadPDF(title):
 #getting arguments
 args = sys.argv[1:]
 
-if len(args) == 0:
+#if no args are inputed
+if len(args) == 1:
     print("Please, specify a book title.")
     print("Error: no book title")
 
-else:
-    try:
-        book_title = []
-        number_of_pages = 0
-        for arg in args:
-            if arg != "-p":
-                book_title.append(arg)
-            else:
-                number_of_pages = int(args[args.index(arg) + 1])
-                break
-    except:
-        print('Error: please, check command ortography.')
+#joining book title
+book_title = "+".join(args[1:])
 
-book_title = "+".join(book_title)
-
+#searching for URL's
 pdfs = downloadPDF(book_title)
 url = pdfs[int(input('Choose an URL: '))]
 
-driver.get(url)
+#opening the URL and downloading pdf
+os.system('start ' + url)
+
+#closing program
+driver.close()
