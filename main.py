@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 
-#starting brownser
+#starting browser
 options = Options()
 options.headless = True
 driver = webdriver.Firefox(options=options)
